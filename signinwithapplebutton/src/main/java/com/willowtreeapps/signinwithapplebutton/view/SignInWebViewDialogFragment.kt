@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.webkit.WebSettings
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.webkit.WebView
@@ -58,6 +59,14 @@ internal class SignInWebViewDialogFragment : DialogFragment() {
             settings.apply {
                 javaScriptEnabled = true
                 javaScriptCanOpenWindowsAutomatically = true
+                domStorageEnabled = true
+                setSupportMultipleWindows(true)
+
+                val finalUa = WebSettings.getDefaultUserAgent(this@SignInWebViewDialogFragment)
+                .replace("; wv", "")
+                .replace(" Version/4.0", "")
+                userAgentString = finalUa
+                
             }
         }
 
